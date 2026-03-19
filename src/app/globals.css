@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ctp-base: #24273a;
+  --color-ctp-text: #cad3f5;
+  --color-ctp-subtext: #b8c0e0;
+  --color-ctp-pink: #f5bde6;
+  --color-ctp-green: #a6da95;
+  --color-ctp-surface: #363a4f;
+  --color-ctp-overlay: #494d64;
+  --color-ctp-mantle: #1e2030;
+  --color-ctp-crust: #181926;
+  --color-ctp-red: #ed8796;
+
+  --animate-spin-slow: spin 5s linear infinite;
+}
