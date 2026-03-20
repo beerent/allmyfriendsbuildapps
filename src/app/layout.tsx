@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'StreamAds',
+  title: 'All My Friends Build Apps',
   description: 'Run ads on your friends streams',
 };
 

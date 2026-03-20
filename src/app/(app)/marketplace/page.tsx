@@ -5,11 +5,13 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AdCard } from '@/components/ad-card';
 import { SpotifyCard } from '@/components/spotify-card';
+import { TwitchCard } from '@/components/twitch-card';
 import { AddToProfileModal } from '@/components/add-to-profile-modal';
 
 type MarketplaceItem = {
   id: string;
-  type: 'ad' | 'spotify' | 'placeholder';
+  type: 'ad' | 'spotify' | 'placeholder' | 'twitch';
+  variant: string | null;
   creatorFirebaseUid: string | null;
   headline: string | null;
   subtext: string | null;
@@ -75,6 +77,7 @@ export default function Marketplace() {
           <option value="">All Types</option>
           <option value="ad">Ads</option>
           <option value="spotify">Spotify</option>
+          <option value="twitch">Twitch</option>
           <option value="placeholder">Placeholder</option>
         </select>
       </div>
@@ -95,7 +98,9 @@ export default function Marketplace() {
                   brandUrl={item.brandUrl}
                 />
               ) : item.type === 'spotify' ? (
-                <SpotifyCard />
+                <SpotifyCard label={item.headline || 'Spotify'} />
+              ) : item.type === 'twitch' ? (
+                <TwitchCard label={item.headline || 'Twitch'} />
               ) : (
                 <div className="flex h-[120px] w-80 items-center justify-center rounded-md bg-[#24273a] text-xs text-[#6e738d]">
                   Placeholder (invisible on stream)

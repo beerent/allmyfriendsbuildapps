@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AdCard } from '@/components/ad-card';
 import { SpotifyCard } from '@/components/spotify-card';
+import { TwitchCard } from '@/components/twitch-card';
 
 type ProfileItem = {
   id: string;
@@ -13,7 +14,7 @@ type ProfileItem = {
   sortOrder: number;
   marketplaceItem: {
     id: string;
-    type: 'ad' | 'spotify' | 'placeholder';
+    type: 'ad' | 'spotify' | 'placeholder' | 'twitch';
     headline: string | null;
     subtext: string | null;
     brandUrl: string | null;
@@ -163,7 +164,9 @@ export default function ProfileEditor() {
                     brandUrl={item.marketplaceItem.brandUrl}
                   />
                 ) : item.marketplaceItem.type === 'spotify' ? (
-                  <SpotifyCard />
+                  <SpotifyCard label={item.marketplaceItem.headline || 'Spotify'} />
+                ) : item.marketplaceItem.type === 'twitch' ? (
+                  <TwitchCard label={item.marketplaceItem.headline || 'Twitch'} />
                 ) : (
                   <div className="flex h-[120px] w-80 items-center justify-center rounded-md bg-[#24273a] text-xs text-[#6e738d]">
                     Placeholder

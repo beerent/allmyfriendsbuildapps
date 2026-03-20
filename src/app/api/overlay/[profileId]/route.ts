@@ -1,5 +1,6 @@
+// src/app/api/overlay/[profileId]/route.ts
 import { db } from '@/lib/db';
-import { adProfileItems, marketplaceItems } from '@/lib/db/schema';
+import { adProfileItems, adProfiles, marketplaceItems } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
@@ -8,6 +9,15 @@ export async function GET(
   { params }: { params: Promise<{ profileId: string }> }
 ) {
   const { profileId } = await params;
+
+  // Get profile to find ownerId
+  const profile = await db
+    .select({ ownerId: adProfiles.ownerId })
+    .from(adProfiles)
+    .where(eq(adProfiles.id, profileId))
+    .limit(1);
+
+  const ownerId = profile.length > 0 ? profile[0].ownerId : null;
 
   const items = await db
     .select({
@@ -25,5 +35,5 @@ export async function GET(
     sortOrder: i.profileItem.sortOrder,
   }));
 
-  return NextResponse.json(result);
+  return NextResponse.json({ ownerId, items: result });
 }

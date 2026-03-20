@@ -45,6 +45,6 @@ describe('database schema', () => {
   });
 
   it('defines item type enum with correct values', () => {
-    expect(itemTypeEnum.enumValues).toEqual(['ad', 'spotify', 'placeholder']);
+    expect(itemTypeEnum.enumValues).toEqual(['ad', 'spotify', 'placeholder', 'twitch']);
   });
 });

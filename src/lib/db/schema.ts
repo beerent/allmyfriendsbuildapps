@@ -11,6 +11,7 @@ export const itemTypeEnum = pgEnum('item_type', [
   'ad',
   'spotify',
   'placeholder',
+  'twitch',
 ]);
 
 export const users = pgTable('users', {
@@ -19,6 +20,13 @@ export const users = pgTable('users', {
   displayName: text('display_name').notNull(),
   email: text('email').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
+  spotifyAccessToken: text('spotify_access_token'),
+  spotifyRefreshToken: text('spotify_refresh_token'),
+  spotifyTokenExpiry: timestamp('spotify_token_expiry'),
+  twitchAccessToken: text('twitch_access_token'),
+  twitchRefreshToken: text('twitch_refresh_token'),
+  twitchTokenExpiry: timestamp('twitch_token_expiry'),
+  twitchUserId: text('twitch_user_id'),
 });
 
 export const marketplaceItems = pgTable('marketplace_items', {
@@ -29,6 +37,7 @@ export const marketplaceItems = pgTable('marketplace_items', {
   subtext: text('subtext'),
   brandUrl: text('brand_url'),
   imageUrl: text('image_url'),
+  variant: text('variant'),
   displayDuration: integer('display_duration').default(10).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });

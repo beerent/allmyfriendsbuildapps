@@ -42,3 +42,6 @@ next-env.d.ts
 
 .superpowers/
 .worktrees/
+firebase-admin-key.json
+.firebaserc
+firebase.json
