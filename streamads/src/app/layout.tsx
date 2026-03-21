@@ -2,8 +2,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'StreamAds',
-  description: 'Run ads on your friends streams',
+  title: 'thosewho.build',
+  description: 'Your friends ads, Spotify now playing, Twitch events, and more',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

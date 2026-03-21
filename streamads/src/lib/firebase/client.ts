@@ -13,23 +13,19 @@ let _app: FirebaseApp | undefined;
 let _auth: Auth | undefined;
 let _storage: FirebaseStorage | undefined;
 
-function getApp(): FirebaseApp {
+function getFirebaseApp(): FirebaseApp {
   if (!_app) {
     _app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
   }
   return _app;
 }
 
-export const auth = new Proxy({} as Auth, {
-  get(_, prop) {
-    if (!_auth) _auth = getAuth(getApp());
-    return Reflect.get(_auth, prop);
-  },
-});
+export function getFirebaseAuth(): Auth {
+  if (!_auth) _auth = getAuth(getFirebaseApp());
+  return _auth;
+}
 
-export const storage = new Proxy({} as FirebaseStorage, {
-  get(_, prop) {
-    if (!_storage) _storage = getStorage(getApp());
-    return Reflect.get(_storage, prop);
-  },
-});
+export function getFirebaseStorage(): FirebaseStorage {
+  if (!_storage) _storage = getStorage(getFirebaseApp());
+  return _storage;
+}

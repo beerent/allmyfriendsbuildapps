@@ -19,7 +19,10 @@ export default function Dashboard() {
   const [creating, setCreating] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user) router.push('/');
+    if (!loading && !user) {
+      router.push('/');
+      router.refresh();
+    }
   }, [user, loading, router]);
 
   useEffect(() => {

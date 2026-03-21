@@ -1,8 +1,8 @@
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { storage } from './client';
+import { getFirebaseStorage } from './client';
 
 export async function uploadImage(file: File): Promise<string> {
-  const fileRef = ref(storage, `ad-images/${crypto.randomUUID()}-${file.name}`);
+  const fileRef = ref(getFirebaseStorage(), `ad-images/${crypto.randomUUID()}-${file.name}`);
   await uploadBytes(fileRef, file);
   return getDownloadURL(fileRef);
 }

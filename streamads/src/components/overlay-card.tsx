@@ -10,7 +10,7 @@ export function OverlayCard({ children, colorTheme = 'blue' }: OverlayCardProps)
   const theme = colorThemes[colorTheme];
   return (
     <div
-      className="flex h-[120px] w-80 items-center rounded-md p-2 text-[#cad3f5] shadow-lg"
+      className="flex h-[120px] w-80 items-center rounded-md px-4 py-2 text-[#cad3f5] shadow-lg"
       style={{ backgroundColor: theme.bg }}
     >
       {children}

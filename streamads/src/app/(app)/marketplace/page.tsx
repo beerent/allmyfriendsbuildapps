@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { AdCard } from '@/components/ad-card';
 import { CustomCard } from '@/components/custom-card';
 import { SpotifyCard } from '@/components/spotify-card';
+import { TwitchCard } from '@/components/twitch-card';
 import { AddToProfileModal } from '@/components/add-to-profile-modal';
 import type { ColorTheme, ColorStyle } from '@/lib/color-themes';
 
@@ -61,7 +62,8 @@ export default function Marketplace() {
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Marketplace</h1>
+      <h1 className="mb-1 text-2xl font-bold">Marketplace</h1>
+      <p className="mb-6 text-sm text-[#6e738d]">Browse ads from your friends — plus Spotify, Twitch, and other overlay tools.</p>
 
       <div className="mb-6 flex gap-3">
         <input
@@ -77,9 +79,9 @@ export default function Marketplace() {
           className="rounded-md bg-[#363a4f] px-4 py-2 text-[#cad3f5] outline-none"
         >
           <option value="">All</option>
-          <option value="ad">Ads</option>
+          <option value="ad">Friend Ads</option>
           <option value="card">Cards</option>
-          <option value="tools">Tools</option>
+          <option value="tools">Overlay Tools</option>
         </select>
       </div>
 
@@ -110,6 +112,11 @@ export default function Marketplace() {
                 />
               ) : item.type === 'spotify' ? (
                 <SpotifyCard />
+              ) : item.type === 'twitch' ? (
+                <TwitchCard
+                  label={item.headline || undefined}
+                  colorTheme={item.colorTheme as ColorTheme}
+                />
               ) : (
                 <div className="flex h-[120px] w-80 items-center justify-center rounded-md bg-[#24273a] text-xs text-[#6e738d]">
                   Placeholder (invisible on stream)

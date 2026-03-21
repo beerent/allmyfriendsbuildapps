@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="8" fill="#1e2030"/>
+  <!-- Three stacked overlay cards, rotated slightly - representing the rotating overlay -->
+  <rect x="8" y="12" width="16" height="10" rx="2" fill="#363a4f" transform="rotate(-6 16 16)"/>
+  <rect x="8" y="12" width="16" height="10" rx="2" fill="#494d64" transform="rotate(-3 16 16)"/>
+  <rect x="8" y="12" width="16" height="10" rx="2" fill="#a6da95" transform="rotate(0 16 16)"/>
+  <!-- Small dot on the green card - "the spot" -->
+  <circle cx="12" cy="17" r="2" fill="#1e2030"/>
+</svg>
