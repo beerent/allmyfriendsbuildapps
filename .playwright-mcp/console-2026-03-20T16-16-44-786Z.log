@@ -1,0 +1,219 @@
+[      31ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4444/:0
+[     112ms] Error: ./src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+    at <unknown> (Error: ./src/app/globals.css:962:8)
+    at <unknown> (./src/app/globals.css:962:8)
+    at Object.getCompilationErrors (file:///Users/thedevdad/Documents/allmyfriendsbuildapps/.worktrees/streamads/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1189:59)
+    at DevBundlerService.getCompilationError (file:///Users/thedevdad/Documents/allmyfriendsbuildapps/.worktrees/streamads/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/thedevdad/Documents/allmyfriendsbuildapps/.worktrees/streamads/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/thedevdad/Documents/allmyfriendsbuildapps/.worktrees/streamads/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/thedevdad/Documents/allmyfriendsbuildapps/.worktrees/streamads/node_modules/next/dist/server/base-server.js:1745:26)
+[     114ms] [ERROR] ./src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[     114ms] [ERROR] ./src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[     114ms] [ERROR] ./src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[     114ms] [ERROR] ./src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[     114ms] [ERROR] ./src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[     170ms] [ERROR] ./src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[    4312ms] [ERROR] ./src/app/globals.css:962:8
+Parsing CSS source code failed
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Generated code of PostCSS transform of file content of src/app/globals.css:
+./src/app/globals.css:962:8
+  960 |   }
+  961 | }
+> 962 | @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&dis...
+      |        ^
+  963 | @keyframes fade-in-up {
+  964 |   from {
+  965 |     opacity: 0;
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1945
+[   12666ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_0u_w_5s._.js:1226

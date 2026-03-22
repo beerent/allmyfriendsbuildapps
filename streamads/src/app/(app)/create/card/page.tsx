@@ -18,6 +18,8 @@ export default function CreateCard() {
   const [colorTheme, setColorTheme] = useState<ColorTheme>('blue');
   const [colorStyle, setColorStyle] = useState<ColorStyle>('matched');
   const [publishing, setPublishing] = useState(false);
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagInput, setTagInput] = useState('');
 
   useEffect(() => {
     if (!loading && !user) router.push('/');
@@ -41,6 +43,7 @@ export default function CreateCard() {
         imageUrl,
         colorTheme,
         colorStyle,
+        tags: tags.length > 0 ? tags : null,
       }),
     });
     if (res.ok) {
@@ -102,6 +105,35 @@ export default function CreateCard() {
               onThemeChange={setColorTheme}
               onStyleChange={setColorStyle}
             />
+          </div>
+
+          <div>
+            <label className="mb-1 block text-sm text-[#b8c0e0]">Tags (up to 10)</label>
+            <div className="flex flex-wrap gap-1.5 mb-2">
+              {tags.map((tag) => (
+                <span key={tag} className="flex items-center gap-1 rounded-md bg-[#363a4f] px-2 py-1 text-xs text-[#cad3f5]">
+                  {tag}
+                  <button onClick={() => setTags(tags.filter((t) => t !== tag))} className="text-[#6e738d] hover:text-[#ed8796]">&times;</button>
+                </span>
+              ))}
+            </div>
+            {tags.length < 10 && (
+              <input
+                type="text"
+                value={tagInput}
+                onChange={(e) => setTagInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if ((e.key === 'Enter' || e.key === ',') && tagInput.trim()) {
+                    e.preventDefault();
+                    const newTag = tagInput.trim().toLowerCase().replace(/,/g, '');
+                    if (newTag && !tags.includes(newTag)) setTags([...tags, newTag]);
+                    setTagInput('');
+                  }
+                }}
+                placeholder="Type and press Enter"
+                className="w-full rounded-md bg-[#363a4f] px-4 py-2 text-[#cad3f5] placeholder-[#6e738d] outline-none focus:ring-2 focus:ring-[#f5bde6]"
+              />
+            )}
           </div>
 
           <button

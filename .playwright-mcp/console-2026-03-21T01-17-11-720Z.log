@@ -1,0 +1,6 @@
+[  434223ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ http://localhost:4444/_next/static/chunks/node_modules_0g5drkd._.js:13582
+[  434223ms] [ERROR] Cross-Origin-Opener-Policy policy would block the window.closed call. @ http://localhost:4444/_next/static/chunks/node_modules_0g5drkd._.js:13582
+[  444233ms] FirebaseError: Firebase: Error (auth/popup-closed-by-user).
+    at createErrorInternal (http://localhost:4444/_next/static/chunks/node_modules_0g5drkd._.js:5069:41)
+    at _createError (http://localhost:4444/_next/static/chunks/node_modules_0g5drkd._.js:5036:12)
+    at http://localhost:4444/_next/static/chunks/node_modules_0g5drkd._.js:13591:33

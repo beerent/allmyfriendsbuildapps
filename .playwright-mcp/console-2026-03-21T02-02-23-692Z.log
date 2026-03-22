@@ -1,0 +1,181 @@
+[   80471ms] [ERROR] ./src/lib/auth/context.tsx:11:1
+Export auth doesn't exist in target module
+   9 |   type User,
+  10 | } from 'firebase/auth';
+> 11 | import { auth } from '@/lib/firebase/client';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | type AuthContextType = {
+  14 |   user: User | null;
+
+The export auth was not found in module [project]/src/lib/firebase/client.ts [app-client] (ecmascript).
+Did you mean to import getFirebaseAuth?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Server Component:
+    ./src/lib/auth/context.tsx
+    ./src/app/(app)/layout.tsx
+
+  Client Component Browser:
+    ./src/lib/auth/context.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/auth/context.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[   80471ms] [ERROR] ./src/lib/auth/context.tsx:11:1
+Export auth doesn't exist in target module
+   9 |   type User,
+  10 | } from 'firebase/auth';
+> 11 | import { auth } from '@/lib/firebase/client';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | type AuthContextType = {
+  14 |   user: User | null;
+
+The export auth was not found in module [project]/src/lib/firebase/client.ts [app-ssr] (ecmascript).
+Did you mean to import getFirebaseAuth?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Server Component:
+    ./src/lib/auth/context.tsx
+    ./src/app/(app)/layout.tsx
+
+  Client Component Browser:
+    ./src/lib/auth/context.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/auth/context.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[   80537ms] [ERROR] ./src/lib/auth/context.tsx:11:1
+Export auth doesn't exist in target module
+   9 |   type User,
+  10 | } from 'firebase/auth';
+> 11 | import { auth } from '@/lib/firebase/client';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | type AuthContextType = {
+  14 |   user: User | null;
+
+The export auth was not found in module [project]/src/lib/firebase/client.ts [app-client] (ecmascript).
+Did you mean to import getFirebaseAuth?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Server Component:
+    ./src/lib/auth/context.tsx
+    ./src/app/(app)/layout.tsx
+
+  Client Component Browser:
+    ./src/lib/auth/context.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/auth/context.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[   80537ms] [ERROR] ./src/lib/auth/context.tsx:11:1
+Export auth doesn't exist in target module
+   9 |   type User,
+  10 | } from 'firebase/auth';
+> 11 | import { auth } from '@/lib/firebase/client';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | type AuthContextType = {
+  14 |   user: User | null;
+
+The export auth was not found in module [project]/src/lib/firebase/client.ts [app-ssr] (ecmascript).
+Did you mean to import getFirebaseAuth?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Server Component:
+    ./src/lib/auth/context.tsx
+    ./src/app/(app)/layout.tsx
+
+  Client Component Browser:
+    ./src/lib/auth/context.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/auth/context.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[   89208ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   89486ms] ReferenceError: auth is not defined
+    at AuthProvider.useEffect (http://localhost:3000/_next/static/chunks/src_0svele4._.js:30:273)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:15087:22)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at commitHookEffectListMount (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:7255:167)
+    at commitHookPassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:7290:60)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8689:33)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8750:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8750:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8750:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8693:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8693:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8693:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8750:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8750:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8750:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8750:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8750:17)
+    at recursivelyTraversePassiveMountEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8676:316)
+    at commitPassiveMountOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:8688:17)
+[   96433ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   96478ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   96485ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

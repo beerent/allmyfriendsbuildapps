@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'thosewho.build',
+  title: 'thosewho.stream',
   description: 'Your friends ads, Spotify now playing, Twitch events, and more',
   icons: {
     icon: '/favicon.svg',

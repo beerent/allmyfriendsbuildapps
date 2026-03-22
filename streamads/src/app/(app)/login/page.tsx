@@ -4,6 +4,7 @@ import { useAuth } from '@/lib/auth/context';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Logo } from '@/components/logo';
 
 export default function Login() {
   const { user, loading, signInWithGoogle, signInWithEmail, signUpWithEmail } = useAuth();
@@ -45,13 +46,8 @@ export default function Login() {
   return (
     <div className="flex min-h-[80vh] flex-col items-center justify-center">
       <Link href="/" className="mb-8 flex items-center gap-3 text-2xl font-extrabold" style={font}>
-        <svg viewBox="0 0 32 32" className="h-8 w-8">
-          <rect x="8" y="12" width="16" height="10" rx="2" fill="#363a4f" transform="rotate(-6 16 16)"/>
-          <rect x="8" y="12" width="16" height="10" rx="2" fill="#494d64" transform="rotate(-3 16 16)"/>
-          <rect x="8" y="12" width="16" height="10" rx="2" fill="#a6da95" transform="rotate(0 16 16)"/>
-          <circle cx="12" cy="17" r="2" fill="#1e2030"/>
-        </svg>
-        <span className="text-[#cad3f5]">thosewho<span className="text-[#a6da95]">.build</span></span>
+        <Logo className="h-9 w-9" />
+        <span className="text-[#cad3f5]">thosewho<span className="text-[#a6da95]">.stream</span></span>
       </Link>
 
       <div className="glass w-full max-w-sm rounded-2xl p-7">

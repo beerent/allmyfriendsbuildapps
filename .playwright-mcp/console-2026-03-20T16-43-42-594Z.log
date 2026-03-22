@@ -1,0 +1,80 @@
+[  830675ms] [ERROR] ./src/app/(app)/page.tsx:130:7
+Expected ',', got '{'
+  128 |       </div>
+  129 |
+> 130 |       {/* Progress dots */}
+      |       ^
+  131 |       <div className="mt-6 flex justify-center gap-1.5">
+  132 |         {DEMO_CARDS.slice(0, 8).map((_, i) => (
+  133 |           <div
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(app)/page.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(app)/page.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  835600ms] [ERROR] ./src/app/(app)/page.tsx:130:7
+Expected ',', got '{'
+  128 |       </div>
+  129 |
+> 130 |       {/* Progress dots */}
+      |       ^
+  131 |       <div className="mt-6 flex justify-center gap-1.5">
+  132 |         {DEMO_CARDS.slice(0, 8).map((_, i) => (
+  133 |           <div
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(app)/page.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(app)/page.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  837542ms] [ERROR] ./src/app/(app)/page.tsx:130:7
+Expected ',', got '{'
+  128 |       </div>
+  129 |
+> 130 |       {/* Progress dots */}
+      |       ^
+  131 |       <div className="mt-6 flex justify-center gap-1.5">
+  132 |         {DEMO_CARDS.slice(0, 8).map((_, i) => (
+  133 |           <div
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(app)/page.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(app)/page.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[  847570ms] [ERROR] ./src/app/(app)/page.tsx:130:7
+Expected ',', got '{'
+  128 |       </div>
+  129 |
+> 130 |       {/* Progress dots */}
+      |       ^
+  131 |       <div className="mt-6 flex justify-center gap-1.5">
+  132 |         {DEMO_CARDS.slice(0, 8).map((_, i) => (
+  133 |           <div
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(app)/page.tsx [Client Component Browser]
+    ./src/app/(app)/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(app)/page.tsx [Client Component SSR]
+    ./src/app/(app)/page.tsx [Server Component] @ http://localhost:4444/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272

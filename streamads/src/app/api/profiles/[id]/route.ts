@@ -1,6 +1,7 @@
 import { db } from '@/lib/db';
-import { adProfiles, adProfileItems, marketplaceItems } from '@/lib/db/schema';
+import { adProfiles, adProfileItems, marketplaceItems, notifications } from '@/lib/db/schema';
 import { verifyAuthToken } from '@/lib/auth/verify-token';
+import { getPlanLimits } from '@/lib/plans';
 import { eq, and } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
@@ -79,13 +80,26 @@ export async function PUT(
 
     if (items.length > 0) {
       await db.insert(adProfileItems).values(
-        items.map((item: { itemId: string; displayDuration?: number }, index: number) => ({
+        items.map((item: { itemId: string; displayDuration?: number; config?: unknown }, index: number) => ({
           profileId: id,
           itemId: item.itemId,
           displayDuration: item.displayDuration ?? 10,
           sortOrder: index,
+          config: item.config ?? null,
         }))
       );
+
+      for (const newItem of items) {
+        const [mi] = await db.select({ creatorId: marketplaceItems.creatorId }).from(marketplaceItems).where(eq(marketplaceItems.id, newItem.itemId)).limit(1);
+        if (mi?.creatorId && mi.creatorId !== user.id) {
+          await db.insert(notifications).values({
+            userId: mi.creatorId,
+            type: 'card_added',
+            actorId: user.id,
+            targetId: newItem.itemId,
+          });
+        }
+      }
     }
   }
 

@@ -47,7 +47,7 @@ describe('database schema', () => {
   });
 
   it('defines item type enum with correct values', () => {
-    expect(itemTypeEnum.enumValues).toEqual(['ad', 'card', 'spotify', 'placeholder', 'twitch']);
+    expect(itemTypeEnum.enumValues).toEqual(['ad', 'card', 'spotify', 'placeholder', 'twitch', 'kofi', 'buymeacoffee', 'goal', 'countdown']);
   });
 
   it('defines color theme and style columns on marketplace_items', () => {

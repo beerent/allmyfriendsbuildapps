@@ -1,7 +1,8 @@
 import { db } from '@/lib/db';
 import { adProfiles } from '@/lib/db/schema';
 import { verifyAuthToken } from '@/lib/auth/verify-token';
-import { eq } from 'drizzle-orm';
+import { getPlanLimits } from '@/lib/plans';
+import { eq, count } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {

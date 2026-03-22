@@ -8,6 +8,7 @@ import { AdCard } from '@/components/ad-card';
 import { SpotifyCard } from '@/components/spotify-card';
 import { TwitchCard } from '@/components/twitch-card';
 import { colorThemes, type ColorTheme, type ColorStyle } from '@/lib/color-themes';
+import { Logo } from '@/components/logo';
 
 type DemoCard = {
   type: 'ad' | 'spotify' | 'twitch';
@@ -93,7 +94,7 @@ function DemoPreview() {
     { user: 'typeScript_fan', color: '#7dc4e4', msg: 'use zod for that' },
     { user: 'vim_btw', color: '#f5a97f', msg: 'nice refactor' },
     { user: 'react_dev', color: '#c6a0f6', msg: 'love the overlay!' },
-    { user: 'devdad', color: '#8bd5ca', msg: 'thosewho.build ^' },
+    { user: 'devdad', color: '#8bd5ca', msg: 'thosewho.stream ^' },
   ];
 
   function renderCard() {
@@ -283,13 +284,8 @@ export default function Home() {
         {/* ── Top bar ── */}
         <div className="animate-fade-in-up flex items-center justify-between py-4">
           <span className="flex items-center gap-2 text-sm font-bold" style={font}>
-            <svg viewBox="0 0 32 32" className="h-5 w-5">
-              <rect x="8" y="12" width="16" height="10" rx="2" fill="#363a4f" transform="rotate(-6 16 16)"/>
-              <rect x="8" y="12" width="16" height="10" rx="2" fill="#494d64" transform="rotate(-3 16 16)"/>
-              <rect x="8" y="12" width="16" height="10" rx="2" fill="#a6da95" transform="rotate(0 16 16)"/>
-              <circle cx="12" cy="17" r="2" fill="#1e2030"/>
-            </svg>
-            <span className="text-[#cad3f5]">thosewho<span className="text-[#a6da95]">.build</span></span>
+            <Logo className="h-8 w-8" />
+            <span className="text-[#cad3f5]">thosewho<span className="text-[#a6da95]">.stream</span></span>
           </span>
           <Link
             href="/login"
