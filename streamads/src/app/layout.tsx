@@ -2,10 +2,30 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'thosewho.stream',
-  description: 'Your friends ads, Spotify now playing, Twitch events, and more',
+  title: 'thosewho.stream — Stream overlays, alerts, and widgets',
+  description: 'Stream overlays, alerts, and widgets for your community. Show your friends\' ads, Spotify now playing, Twitch events, and more.',
   icons: {
     icon: '/favicon.svg',
+  },
+  openGraph: {
+    title: 'thosewho.stream',
+    description: 'Stream overlays, alerts, and widgets for your community.',
+    url: 'https://thosewho.build',
+    siteName: 'thosewho.stream',
+    images: [
+      {
+        url: 'https://thosewho.build/og-image.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'thosewho.stream',
+    description: 'Stream overlays, alerts, and widgets for your community.',
+    images: ['https://thosewho.build/og-image.png'],
   },
 };
 
