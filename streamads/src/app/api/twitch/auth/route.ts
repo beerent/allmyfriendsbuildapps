@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { verifyAuthToken } from '@/lib/auth/verify-token';
+import { deleteEventSubSubscriptions } from '@/lib/twitch/eventsub';
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -37,6 +38,20 @@ export async function DELETE(request: Request) {
   const { db } = await import('@/lib/db');
   const { users } = await import('@/lib/db/schema');
   const { eq } = await import('drizzle-orm');
+
+  // Get the user's Twitch ID before clearing it
+  const [userData] = await db
+    .select({ twitchUserId: users.twitchUserId })
+    .from(users)
+    .where(eq(users.id, user.id))
+    .limit(1);
+
+  // Clean up EventSub subscriptions
+  if (userData?.twitchUserId) {
+    deleteEventSubSubscriptions(userData.twitchUserId).catch((err) =>
+      console.error('Failed to delete EventSub subscriptions:', err),
+    );
+  }
 
   await db.update(users).set({
     twitchAccessToken: null,
