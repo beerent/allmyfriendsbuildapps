@@ -1,6 +1,6 @@
 import { db } from '@/lib/db';
-import { adProfiles, adProfileItems, marketplaceItems, users } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
+import { adProfiles, adProfileItems, marketplaceItems, users, twitchEvents } from '@/lib/db/schema';
+import { eq, desc } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 async function refreshTwitchToken(userId: string, refreshToken: string): Promise<string | null> {
@@ -72,34 +72,20 @@ async function fetchTwitchFollower(token: string, broadcasterId: string): Promis
   }
 }
 
-async function fetchTwitchLatestSub(token: string, broadcasterId: string): Promise<{ username: string; avatarUrl: string | null } | null> {
+async function fetchTwitchLatestSub(broadcasterId: string): Promise<{ username: string; avatarUrl: string | null } | null> {
   try {
-    const res = await fetch(`https://api.twitch.tv/helix/subscriptions?broadcaster_id=${broadcasterId}&first=1`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Client-Id': process.env.TWITCH_CLIENT_ID!,
-      },
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    // Filter out the broadcaster themselves
-    const sub = data.data?.find((s: { user_id: string }) => s.user_id !== broadcasterId);
-    if (!sub) return null;
+    const [event] = await db
+      .select({
+        userName: twitchEvents.userName,
+        avatarUrl: twitchEvents.avatarUrl,
+      })
+      .from(twitchEvents)
+      .where(eq(twitchEvents.broadcasterId, broadcasterId))
+      .orderBy(desc(twitchEvents.createdAt))
+      .limit(1);
 
-    // Fetch avatar
-    const userRes = await fetch(`https://api.twitch.tv/helix/users?id=${sub.user_id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Client-Id': process.env.TWITCH_CLIENT_ID!,
-      },
-    });
-    let avatarUrl = null;
-    if (userRes.ok) {
-      const userData = await userRes.json();
-      avatarUrl = userData.data?.[0]?.profile_image_url ?? null;
-    }
-
-    return { username: sub.user_name, avatarUrl };
+    if (!event) return null;
+    return { username: event.userName, avatarUrl: event.avatarUrl };
   } catch {
     return null;
   }
@@ -213,7 +199,7 @@ export async function GET(
 
       const fetchPromises: Promise<any>[] = [
         fetchTwitchFollower(token, ownerData.twitchUserId),
-        fetchTwitchLatestSub(token, ownerData.twitchUserId),
+        fetchTwitchLatestSub(ownerData.twitchUserId),
         needsSubs ? fetchTwitchSubCount(token, ownerData.twitchUserId) : Promise.resolve(0),
         needsBits ? fetchTwitchBitsTotal(token, ownerData.twitchUserId, new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)) : Promise.resolve(0),
         needsBits ? fetchTwitchBitsToday(token) : Promise.resolve(0),
