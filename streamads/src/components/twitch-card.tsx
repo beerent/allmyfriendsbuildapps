@@ -5,6 +5,7 @@ type TwitchCardProps = {
   label?: string;
   username?: string;
   avatarUrl?: string;
+  subtitle?: string;
   status?: 'connected' | 'not-connected';
   colorTheme?: ColorTheme;
 };
@@ -13,6 +14,7 @@ export function TwitchCard({
   label = 'Latest Follower',
   username,
   avatarUrl,
+  subtitle,
   status,
   colorTheme,
 }: TwitchCardProps) {
@@ -49,7 +51,10 @@ export function TwitchCard({
         <div className="flex flex-col gap-1">
           <h2 className="text-sm font-semibold">{label}</h2>
           {username ? (
-            <p className="text-xs text-[#cad3f5]">{username}</p>
+            <>
+              <p className="text-xs text-[#cad3f5]">{username}</p>
+              {subtitle && <p className="text-xs text-[#6e738d]">{subtitle}</p>}
+            </>
           ) : (
             <p className="text-xs text-[#6e738d]">None yet</p>
           )}

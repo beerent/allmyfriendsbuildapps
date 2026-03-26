@@ -72,12 +72,15 @@ async function fetchTwitchFollower(token: string, broadcasterId: string): Promis
   }
 }
 
-async function fetchTwitchLatestSub(broadcasterId: string): Promise<{ username: string; avatarUrl: string | null } | null> {
+async function fetchTwitchLatestSub(broadcasterId: string): Promise<{ username: string; avatarUrl: string | null; eventType: string | null; cumulativeMonths: number | null; giftTotal: number | null } | null> {
   try {
     const [event] = await db
       .select({
         userName: twitchEvents.userName,
         avatarUrl: twitchEvents.avatarUrl,
+        eventType: twitchEvents.eventType,
+        cumulativeMonths: twitchEvents.cumulativeMonths,
+        giftTotal: twitchEvents.giftTotal,
       })
       .from(twitchEvents)
       .where(eq(twitchEvents.broadcasterId, broadcasterId))
@@ -85,7 +88,7 @@ async function fetchTwitchLatestSub(broadcasterId: string): Promise<{ username: 
       .limit(1);
 
     if (!event) return null;
-    return { username: event.userName, avatarUrl: event.avatarUrl };
+    return { username: event.userName, avatarUrl: event.avatarUrl, eventType: event.eventType, cumulativeMonths: event.cumulativeMonths, giftTotal: event.giftTotal };
   } catch {
     return null;
   }
@@ -182,7 +185,7 @@ export async function GET(
   // Determine what Twitch data to fetch based on items
   const hasGoalItems = items.some((i) => i.marketplaceItem.type === 'goal');
   let twitchFollower: { username: string; avatarUrl: string | null } | null = null;
-  let twitchLatestSub: { username: string; avatarUrl: string | null } | null = null;
+  let twitchLatestSub: { username: string; avatarUrl: string | null; eventType: string | null; cumulativeMonths: number | null; giftTotal: number | null } | null = null;
   let twitchSubCount = 0;
   let twitchBitsTotal = 0;
   let twitchBitsToday = 0;
@@ -252,6 +255,9 @@ export async function GET(
         ...base,
         twitchUsername: twitchData?.username ?? null,
         twitchAvatarUrl: twitchData?.avatarUrl ?? null,
+        twitchEventType: (!isFollowerCard && twitchLatestSub?.eventType) ?? null,
+        twitchCumulativeMonths: (!isFollowerCard && twitchLatestSub?.cumulativeMonths) ?? null,
+        twitchGiftTotal: (!isFollowerCard && twitchLatestSub?.giftTotal) ?? null,
       };
     }
 

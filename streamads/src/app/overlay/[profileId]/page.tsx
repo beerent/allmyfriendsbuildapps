@@ -28,6 +28,9 @@ type OverlayItem = {
   ownerBmc?: string | null;
   twitchUsername?: string | null;
   twitchAvatarUrl?: string | null;
+  twitchEventType?: string | null;
+  twitchCumulativeMonths?: number | null;
+  twitchGiftTotal?: number | null;
   goalTitle?: string | null;
   goalCurrent?: number;
   goalTarget?: number;
@@ -165,6 +168,15 @@ export default function OverlayPage() {
           label={current.headline || undefined}
           username={current.twitchUsername || undefined}
           avatarUrl={current.twitchAvatarUrl || undefined}
+          subtitle={
+            current.twitchEventType === 'resub' && current.twitchCumulativeMonths
+              ? `Resubbed for ${current.twitchCumulativeMonths} months`
+              : current.twitchEventType === 'gift_sub' && current.twitchGiftTotal
+                ? `Gifted ${current.twitchGiftTotal} sub${current.twitchGiftTotal > 1 ? 's' : ''}`
+                : current.twitchEventType === 'subscribe'
+                  ? 'New sub'
+                  : undefined
+          }
           colorTheme={current.colorTheme as ColorTheme}
         />
       ) : current.type === 'kofi' ? (
