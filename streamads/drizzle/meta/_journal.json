@@ -8,6 +8,13 @@
       "when": 1774021987675,
       "tag": "0000_glamorous_wild_pack",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774523546478,
+      "tag": "0001_lean_zaran",
+      "breakpoints": true
     }
   ]
 }

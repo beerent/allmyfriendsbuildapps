@@ -91,6 +91,32 @@ export const adProfileItems = pgTable('ad_profile_items', {
 
 export const platformEnum = pgEnum('platform', ['twitch', 'youtube', 'kick', 'x', 'tiktok']);
 
+export const twitchEventTypeEnum = pgEnum('twitch_event_type', [
+  'subscribe',
+  'resub',
+  'gift_sub',
+]);
+
+export const twitchEvents = pgTable('twitch_events', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  messageId: text('message_id').notNull().unique(),
+  broadcasterId: text('broadcaster_id').notNull(),
+  eventType: twitchEventTypeEnum('event_type').notNull(),
+  userName: text('user_name').notNull(),
+  userId: text('user_id').notNull(),
+  avatarUrl: text('avatar_url'),
+  tier: text('tier').notNull(),
+  message: text('message'),
+  cumulativeMonths: integer('cumulative_months'),
+  streakMonths: integer('streak_months'),
+  isGift: integer('is_gift').default(0).notNull(),
+  gifterName: text('gifter_name'),
+  gifterId: text('gifter_id'),
+  giftTotal: integer('gift_total'),
+  eventTimestamp: timestamp('event_timestamp').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
 export const socialLinks = pgTable('social_links', {
   id: uuid('id').defaultRandom().primaryKey(),
   userId: uuid('user_id')
