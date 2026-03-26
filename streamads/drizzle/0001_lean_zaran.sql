@@ -87,3 +87,5 @@ ALTER TABLE "social_links" ADD CONSTRAINT "social_links_user_id_users_id_fk" FOR
 ALTER TABLE "upvotes" ADD CONSTRAINT "upvotes_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "upvotes" ADD CONSTRAINT "upvotes_item_id_marketplace_items_id_fk" FOREIGN KEY ("item_id") REFERENCES "public"."marketplace_items"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "users" ADD CONSTRAINT "users_username_unique" UNIQUE("username");
+--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "idx_twitch_events_broadcaster_created" ON "twitch_events" ("broadcaster_id", "created_at" DESC);
