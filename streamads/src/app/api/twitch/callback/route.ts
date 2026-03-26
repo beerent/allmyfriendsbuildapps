@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { users } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
+import { createEventSubSubscriptions } from '@/lib/twitch/eventsub';
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -54,6 +55,13 @@ export async function GET(request: Request) {
     twitchTokenExpiry: expiry,
     twitchUserId,
   }).where(eq(users.firebaseUid, state));
+
+  // Create EventSub subscriptions for real-time sub events
+  if (twitchUserId) {
+    createEventSubSubscriptions(twitchUserId).catch((err) =>
+      console.error('Failed to create EventSub subscriptions:', err),
+    );
+  }
 
   return NextResponse.redirect(new URL('/integrations?connected=twitch', baseUrl));
 }
