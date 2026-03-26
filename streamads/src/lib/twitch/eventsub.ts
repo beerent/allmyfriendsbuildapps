@@ -74,30 +74,36 @@ export async function deleteEventSubSubscriptions(
   broadcasterUserId: string,
 ): Promise<void> {
   const appToken = await getAppAccessToken();
+  const headers = {
+    Authorization: `Bearer ${appToken}`,
+    'Client-Id': process.env.TWITCH_CLIENT_ID!,
+  };
 
-  // List all subscriptions
-  const res = await fetch(EVENTSUB_URL, {
-    headers: {
-      Authorization: `Bearer ${appToken}`,
-      'Client-Id': process.env.TWITCH_CLIENT_ID!,
-    },
-  });
+  // Paginate through all subscriptions to find ones for this broadcaster
+  let cursor: string | undefined;
+  const subsToDelete: string[] = [];
 
-  if (!res.ok) return;
+  do {
+    const url = cursor
+      ? `${EVENTSUB_URL}?after=${cursor}`
+      : EVENTSUB_URL;
 
-  const data = await res.json();
-  const subs = (data.data ?? []).filter(
-    (s: any) =>
-      s.condition?.broadcaster_user_id === broadcasterUserId,
-  );
+    const res = await fetch(url, { headers });
+    if (!res.ok) return;
 
-  for (const sub of subs) {
-    await fetch(`${EVENTSUB_URL}?id=${sub.id}`, {
+    const data = await res.json();
+    for (const sub of data.data ?? []) {
+      if (sub.condition?.broadcaster_user_id === broadcasterUserId) {
+        subsToDelete.push(sub.id);
+      }
+    }
+    cursor = data.pagination?.cursor;
+  } while (cursor);
+
+  for (const subId of subsToDelete) {
+    await fetch(`${EVENTSUB_URL}?id=${subId}`, {
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${appToken}`,
-        'Client-Id': process.env.TWITCH_CLIENT_ID!,
-      },
+      headers,
     });
   }
 }

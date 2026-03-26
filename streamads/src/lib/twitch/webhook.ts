@@ -17,6 +17,10 @@ export function verifyTwitchSignature(
 
   if (!messageId || !timestamp || !signature) return false;
 
+  // Reject messages older than 10 minutes to prevent replay attacks
+  const timestampAge = Math.abs(Date.now() - new Date(timestamp).getTime());
+  if (timestampAge > 10 * 60 * 1000) return false;
+
   const message = messageId + timestamp + rawBody;
   const expectedSig =
     'sha256=' + createHmac('sha256', secret).update(message).digest('hex');
