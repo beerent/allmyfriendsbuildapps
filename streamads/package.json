@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "migrate:eventsub": "npx tsx src/lib/twitch/migrate-eventsub.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.1",
