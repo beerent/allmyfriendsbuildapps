@@ -2,9 +2,24 @@
 
 import { useAuth } from '@/lib/auth/context';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { ImageUpload } from '@/components/image-upload';
 import { AdCard } from '@/components/ad-card';
+
+function extractDomain(input: string): string | null {
+  let url = input.trim();
+  if (!url) return null;
+  if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return null;
+  }
+}
+
+function getFaviconUrl(domain: string): string {
+  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=128`;
+}
 
 export default function CreateAd() {
   const { user, loading, getIdToken } = useAuth();
@@ -15,10 +30,22 @@ export default function CreateAd() {
   const [brandUrl, setBrandUrl] = useState('');
   const [displayDuration, setDisplayDuration] = useState(10);
   const [publishing, setPublishing] = useState(false);
+  const hasManualImage = useRef(false);
 
   useEffect(() => {
     if (!loading && !user) router.push('/');
   }, [user, loading, router]);
+
+  // Auto-set favicon when brandUrl changes and no manual image uploaded
+  useEffect(() => {
+    if (hasManualImage.current) return;
+    const domain = extractDomain(brandUrl);
+    if (domain) {
+      setImageUrl(getFaviconUrl(domain));
+    } else {
+      setImageUrl(null);
+    }
+  }, [brandUrl]);
 
   async function publish() {
     if (!headline.trim()) return;
@@ -55,7 +82,19 @@ export default function CreateAd() {
         <div className="flex flex-col gap-4">
           <div>
             <label className="mb-1 block text-sm text-[#b8c0e0]">Logo / Image</label>
-            <ImageUpload onUpload={setImageUrl} currentUrl={imageUrl ?? undefined} />
+            <ImageUpload
+              onUpload={(url) => {
+                hasManualImage.current = true;
+                setImageUrl(url);
+              }}
+              onClear={() => {
+                hasManualImage.current = false;
+                const domain = extractDomain(brandUrl);
+                setImageUrl(domain ? getFaviconUrl(domain) : null);
+              }}
+              currentUrl={imageUrl ?? undefined}
+              isFavicon={!hasManualImage.current && !!imageUrl}
+            />
           </div>
 
           <div>
