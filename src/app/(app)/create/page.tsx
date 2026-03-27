@@ -2,197 +2,41 @@
 
 import { useAuth } from '@/lib/auth/context';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState, useRef } from 'react';
-import { ImageUpload } from '@/components/image-upload';
-import { AdCard } from '@/components/ad-card';
+import { useEffect } from 'react';
+import Link from 'next/link';
 
-function extractDomain(input: string): string | null {
-  let url = input.trim();
-  if (!url) return null;
-  if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
-  try {
-    return new URL(url).hostname;
-  } catch {
-    return null;
-  }
-}
-
-export default function CreateAd() {
-  const { user, loading, getIdToken } = useAuth();
+export default function CreateIndex() {
+  const { user, loading } = useAuth();
   const router = useRouter();
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [headline, setHeadline] = useState('');
-  const [subtext, setSubtext] = useState('');
-  const [brandUrl, setBrandUrl] = useState('');
-  const [displayDuration, setDisplayDuration] = useState(10);
-  const [publishing, setPublishing] = useState(false);
-  const [faviconLoading, setFaviconLoading] = useState(false);
-  const hasManualImage = useRef(false);
 
   useEffect(() => {
     if (!loading && !user) router.push('/');
   }, [user, loading, router]);
 
-  // Debounced favicon fetch when brandUrl changes and no manual image uploaded
-  useEffect(() => {
-    if (hasManualImage.current) return;
-    const domain = extractDomain(brandUrl);
-    if (!domain) {
-      setImageUrl(null);
-      return;
-    }
-
-    setFaviconLoading(true);
-    const timer = setTimeout(async () => {
-      try {
-        const res = await fetch(`/api/favicon?domain=${encodeURIComponent(domain)}`);
-        const data = await res.json();
-        if (!hasManualImage.current) {
-          setImageUrl(data.url ?? null);
-        }
-      } catch {
-        // ignore fetch errors
-      }
-      setFaviconLoading(false);
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-      setFaviconLoading(false);
-    };
-  }, [brandUrl]);
-
-  async function publish() {
-    if (!headline.trim()) return;
-    setPublishing(true);
-    const token = await getIdToken();
-    const res = await fetch('/api/marketplace', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        headline,
-        subtext: subtext || null,
-        brandUrl: brandUrl || null,
-        imageUrl,
-        displayDuration,
-      }),
-    });
-    if (res.ok) {
-      router.push('/marketplace');
-    }
-    setPublishing(false);
-  }
-
   if (loading || !user) return null;
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Create Ad</h1>
-
-      <div className="grid grid-cols-2 gap-8">
-        {/* Form */}
-        <div className="flex flex-col gap-4">
-          <div>
-            <label className="mb-1 block text-sm text-[#b8c0e0]">Logo / Image</label>
-            <ImageUpload
-              onUpload={(url) => {
-                hasManualImage.current = true;
-                setImageUrl(url);
-              }}
-              onClear={async () => {
-                hasManualImage.current = false;
-                const domain = extractDomain(brandUrl);
-                if (domain) {
-                  setFaviconLoading(true);
-                  try {
-                    const res = await fetch(`/api/favicon?domain=${encodeURIComponent(domain)}`);
-                    const data = await res.json();
-                    setImageUrl(data.url ?? null);
-                  } catch {
-                    setImageUrl(null);
-                  }
-                  setFaviconLoading(false);
-                } else {
-                  setImageUrl(null);
-                }
-              }}
-              currentUrl={imageUrl ?? undefined}
-              isFavicon={!hasManualImage.current && !!imageUrl}
-              loading={faviconLoading}
-            />
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm text-[#b8c0e0]">Headline</label>
-            <input
-              type="text"
-              value={headline}
-              onChange={(e) => setHeadline(e.target.value)}
-              placeholder="Use Code: FRIEND20"
-              className="w-full rounded-md bg-[#363a4f] px-4 py-2 text-[#cad3f5] placeholder-[#6e738d] outline-none focus:ring-2 focus:ring-[#f5bde6]"
-            />
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm text-[#b8c0e0]">Subtext</label>
-            <input
-              type="text"
-              value={subtext}
-              onChange={(e) => setSubtext(e.target.value)}
-              placeholder="20% off your first order"
-              className="w-full rounded-md bg-[#363a4f] px-4 py-2 text-[#cad3f5] placeholder-[#6e738d] outline-none focus:ring-2 focus:ring-[#f5bde6]"
-            />
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm text-[#b8c0e0]">Brand URL</label>
-            <input
-              type="text"
-              value={brandUrl}
-              onChange={(e) => setBrandUrl(e.target.value)}
-              placeholder="coolbrand.com"
-              className="w-full rounded-md bg-[#363a4f] px-4 py-2 text-[#cad3f5] placeholder-[#6e738d] outline-none focus:ring-2 focus:ring-[#f5bde6]"
-            />
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm text-[#b8c0e0]">
-              Display Duration (seconds)
-            </label>
-            <input
-              type="number"
-              value={displayDuration}
-              onChange={(e) => setDisplayDuration(Number(e.target.value))}
-              min={3}
-              max={60}
-              className="w-24 rounded-md bg-[#363a4f] px-4 py-2 text-[#cad3f5] outline-none focus:ring-2 focus:ring-[#f5bde6]"
-            />
-          </div>
-
-          <button
-            onClick={publish}
-            disabled={publishing || !headline.trim()}
-            className="mt-4 rounded-md bg-[#f5bde6] px-6 py-3 font-medium text-[#24273a] hover:bg-[#c6a0f6] disabled:opacity-50"
-          >
-            {publishing ? 'Publishing...' : 'Publish to Marketplace'}
-          </button>
-        </div>
-
-        {/* Live Preview */}
-        <div>
-          <label className="mb-3 block text-sm text-[#b8c0e0]">Live Preview</label>
-          <div className="flex items-start justify-center rounded-md bg-[#181926] p-8">
-            <AdCard
-              imageUrl={imageUrl}
-              headline={headline || 'Your Headline'}
-              subtext={subtext || null}
-              brandUrl={brandUrl || null}
-            />
-          </div>
-        </div>
+      <h1 className="mb-6 text-2xl font-bold">Create</h1>
+      <div className="grid grid-cols-2 gap-6">
+        <Link
+          href="/create/ad"
+          className="flex flex-col gap-2 rounded-md bg-[#1e2030] p-6 hover:bg-[#363a4f]"
+        >
+          <h2 className="text-lg font-semibold text-[#cad3f5]">Create Ad</h2>
+          <p className="text-sm text-[#b8c0e0]">
+            Promote a brand with a logo, headline, subtext, and URL.
+          </p>
+        </Link>
+        <Link
+          href="/create/card"
+          className="flex flex-col gap-2 rounded-md bg-[#1e2030] p-6 hover:bg-[#363a4f]"
+        >
+          <h2 className="text-lg font-semibold text-[#cad3f5]">Create Card</h2>
+          <p className="text-sm text-[#b8c0e0]">
+            Share a custom card with a photo, headline, and text.
+          </p>
+        </Link>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { uploadImage } from '@/lib/firebase/storage';
 
 type ImageUploadProps = {
   onUpload: (url: string) => void;
@@ -21,12 +20,21 @@ export function ImageUpload({ onUpload, onClear, currentUrl, isFavicon, loading:
 
     setUploading(true);
     try {
-      const url = await uploadImage(file);
-      onUpload(url);
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = reader.result as string;
+        onUpload(dataUrl);
+        setUploading(false);
+      };
+      reader.onerror = () => {
+        console.error('Failed to read file');
+        setUploading(false);
+      };
+      reader.readAsDataURL(file);
     } catch (err) {
       console.error('Upload failed:', err);
+      setUploading(false);
     }
-    setUploading(false);
   }
 
   return (
