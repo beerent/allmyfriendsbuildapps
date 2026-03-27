@@ -8,9 +8,10 @@ type ImageUploadProps = {
   onClear?: () => void;
   currentUrl?: string;
   isFavicon?: boolean;
+  loading?: boolean;
 };
 
-export function ImageUpload({ onUpload, onClear, currentUrl, isFavicon }: ImageUploadProps) {
+export function ImageUpload({ onUpload, onClear, currentUrl, isFavicon, loading: externalLoading }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -37,7 +38,7 @@ export function ImageUpload({ onUpload, onClear, currentUrl, isFavicon }: ImageU
         >
           {currentUrl ? (
             <img src={currentUrl} alt="Logo" className="h-16 w-16 rounded-md object-cover" />
-          ) : uploading ? (
+          ) : uploading || externalLoading ? (
             <span className="text-xs text-[#b8c0e0]">...</span>
           ) : (
             <span className="text-2xl text-[#6e738d]">+</span>

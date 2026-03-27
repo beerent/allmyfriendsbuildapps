@@ -17,10 +17,6 @@ function extractDomain(input: string): string | null {
   }
 }
 
-function getFaviconUrl(domain: string): string {
-  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=128`;
-}
-
 export default function CreateAd() {
   const { user, loading, getIdToken } = useAuth();
   const router = useRouter();
@@ -30,21 +26,40 @@ export default function CreateAd() {
   const [brandUrl, setBrandUrl] = useState('');
   const [displayDuration, setDisplayDuration] = useState(10);
   const [publishing, setPublishing] = useState(false);
+  const [faviconLoading, setFaviconLoading] = useState(false);
   const hasManualImage = useRef(false);
 
   useEffect(() => {
     if (!loading && !user) router.push('/');
   }, [user, loading, router]);
 
-  // Auto-set favicon when brandUrl changes and no manual image uploaded
+  // Debounced favicon fetch when brandUrl changes and no manual image uploaded
   useEffect(() => {
     if (hasManualImage.current) return;
     const domain = extractDomain(brandUrl);
-    if (domain) {
-      setImageUrl(getFaviconUrl(domain));
-    } else {
+    if (!domain) {
       setImageUrl(null);
+      return;
     }
+
+    setFaviconLoading(true);
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/favicon?domain=${encodeURIComponent(domain)}`);
+        const data = await res.json();
+        if (!hasManualImage.current) {
+          setImageUrl(data.url ?? null);
+        }
+      } catch {
+        // ignore fetch errors
+      }
+      setFaviconLoading(false);
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+      setFaviconLoading(false);
+    };
   }, [brandUrl]);
 
   async function publish() {
@@ -87,13 +102,26 @@ export default function CreateAd() {
                 hasManualImage.current = true;
                 setImageUrl(url);
               }}
-              onClear={() => {
+              onClear={async () => {
                 hasManualImage.current = false;
                 const domain = extractDomain(brandUrl);
-                setImageUrl(domain ? getFaviconUrl(domain) : null);
+                if (domain) {
+                  setFaviconLoading(true);
+                  try {
+                    const res = await fetch(`/api/favicon?domain=${encodeURIComponent(domain)}`);
+                    const data = await res.json();
+                    setImageUrl(data.url ?? null);
+                  } catch {
+                    setImageUrl(null);
+                  }
+                  setFaviconLoading(false);
+                } else {
+                  setImageUrl(null);
+                }
               }}
               currentUrl={imageUrl ?? undefined}
               isFavicon={!hasManualImage.current && !!imageUrl}
+              loading={faviconLoading}
             />
           </div>
 
